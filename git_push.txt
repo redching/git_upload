@@ -1,0 +1,15 @@
+git status
+git add
+git commit -m "訊息"
+git push origin main
+
+______________________________________
+在【git_upload】右鍵打開 Git Bash
+
+git status 看專案狀態
+
+git add . 加入所有檔案
+
+git commit –m "【摘要】第一次push"
+
+git push origin main 推上 GitHub
