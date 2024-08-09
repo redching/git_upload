@@ -1,0 +1,16 @@
+package com.cathaybk.practice.nt50358.b;
+
+import java.awt.event.MouseMotionAdapter;
+import java.util.Scanner;
+
+public class PrecticeFive {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner inputmonth = new Scanner(System.in);
+		System.out.println("輸入介於1~12之間的整數：");
+		int monthnumber = inputmonth.nextInt();
+		System.out.println(monthnumber);
+	}
+
+}

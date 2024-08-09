@@ -1,0 +1,32 @@
+package precticepage60;
+
+import java.awt.print.Printable;
+
+import org.w3c.dom.ls.LSOutput;
+
+public class ComStudent extends student {
+	static String program;
+
+	public ComStudent() {
+		System.out.println("沒有傳入參數的ComStudent類別");
+	}
+
+	public ComStudent(String name, int id, int grade, String program) {
+		super(name, id, grade);
+		this.program = program;
+	}
+
+	@Override
+	public void print() {
+		// TODO Auto-generated method stub
+
+		super.print();
+		System.out.println("程式語言：" + program);
+	}
+
+	public static void main(String[] args) {
+		program = "12315";
+		ComStudent res = new ComStudent();
+		res.print();
+	}
+}

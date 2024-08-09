@@ -1,0 +1,10 @@
+package com.cathaybk.javaedu.lesson2.practice;
+
+public class ExceptionHandle {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

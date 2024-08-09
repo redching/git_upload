@@ -1,0 +1,10 @@
+package com.cathaybk.javaedu.lesson2.practice;
+
+public class SongMap {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

@@ -1,0 +1,10 @@
+package animalprectice_extends;
+
+public abstract class animal_father {
+	private String name;
+	private int age;
+	public abstract void makeSound();
+	public void printinfo() {
+		System.out.println("寵物名字：" + name + "年齡：" + age);
+	}
+}

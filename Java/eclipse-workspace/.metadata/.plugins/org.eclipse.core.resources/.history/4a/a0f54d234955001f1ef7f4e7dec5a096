@@ -1,0 +1,33 @@
+package com.cathaybk.practice.nt50358.b;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class PrecticeThree {
+	public static void main(String[] args) {
+		List<Employee> employeeList = new ArrayList<>();
+		employeeList.add(new Sales("張志城","信用卡部", 35000, 6000));
+		employeeList.add(new Sales("林大鈞","保代部", 38000, 4000));
+		employeeList.add(new Supervisor("李中白","資訊部", 65000));
+		employeeList.add(new Supervisor("林小中","理財部", 80000));
+		for(Employee employee : employeeList) {
+			employee.printinfo();
+		}
+		for(int j=0;j<employeeList.size();j++ ) {
+			String res = employeeList.get(j).getName();
+			String ress ;
+			System.out.println(res);
+		}
+//		try {
+//            BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"));
+//            writer.write(employeeList.);
+//            writer.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+    }
+	
+}

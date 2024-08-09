@@ -1,0 +1,24 @@
+package com.cathaybk.practice.nt50358.b;
+
+public class Supervisor extends Employee {
+	private int payment;
+
+	public Supervisor(String string, String string2, int i) {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void printinfo() {
+		// TODO Auto-generated method stub
+		super.printinfo();
+	}
+
+	public int getPayment() {
+		return payment;
+	}
+
+	public void setPayment(int payment) {
+		this.payment = payment;
+	}
+
+}

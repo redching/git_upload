@@ -1,0 +1,20 @@
+package precticepage60;
+
+public class ComStudent extends student {
+	String program ;
+	public ComStudent() {
+		System.out.println("沒有傳入參數的ComStudent類別");
+	}
+	public ComStudent(String name, int id, int grade, String program) {
+		super(name, id, grade);
+		this.program = program;
+	}
+	@Override
+	public void print() {
+		// TODO Auto-generated method stub
+	
+	 super.print();	
+	 this.program = "Java" ;
+	}
+	
+}

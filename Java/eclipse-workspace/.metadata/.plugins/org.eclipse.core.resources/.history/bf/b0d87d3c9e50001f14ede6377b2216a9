@@ -1,0 +1,30 @@
+package com.cathaybk.javaedu.lesson1.practice;
+
+import java.util.Random;
+
+public class AdvancedGame {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Random random = new Random();
+		int a = random.nextInt(3) + 1;
+		int b = random.nextInt(3) + 1;
+		if(a==1) {
+			System.out.println("A出拳:石頭");
+		} else if(a==2) {
+			System.out.println("A出拳:剪刀");
+		} else {
+			System.out.println("A出拳:布");
+		}
+		if(a > b) {
+			System.out.println("A贏");
+		} else if(a < b) {
+			System.out.println("B贏");
+		} else {
+			System.out.println("平手");
+		}
+		
+	}
+
+}

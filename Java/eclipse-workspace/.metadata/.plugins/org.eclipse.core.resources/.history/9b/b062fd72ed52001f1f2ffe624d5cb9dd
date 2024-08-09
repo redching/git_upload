@@ -1,0 +1,14 @@
+package precticepage60;
+
+public class LangStudent extends student {
+	private void LangStudent() {
+		// TODO Auto-generated method stub
+		System.out.println("沒有傳入參數的LangStudent類別");
+	}
+
+	public LangStudent(String name, int id, int grade, String language) {
+		super(name, id, grade);
+		this language = language;
+	}
+	
+}

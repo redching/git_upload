@@ -1,0 +1,43 @@
+package com.cathaybk.practice.nt50358.b;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+
+public class PrecticeThree {
+	public static void main(String[] args) {
+		List<Employee> employeeList = new ArrayList<>();
+		employeeList.add(new Sales("張志城","信用卡部", 35000, 6000));
+		employeeList.add(new Sales("林大鈞","保代部", 38000, 4000));
+		employeeList.add(new Supervisor("張志城","信用卡部", 65000));
+		employeeList.add(new Supervisor("張志城","信用卡部", 80000));
+		for(Employee employee : employeeList) {
+			employee.printinfo();
+		}
+		try {
+			   InputStreamReader isr = new InputStreamReader(new FileInputStream("C://file_input.csv"));//檔案讀取路徑
+			   BufferedReader reader = new BufferedReader(isr);
+			   BufferedWriter bw = new BufferedWriter(new FileWriter("D://file_output.csv"));//檔案輸出路徑
+			   String line = null;
+			   while((line=reader.readLine())!=null){
+			                String item[] = line.split(",");
+
+			     /** 寫出 **/
+			    bw.newLine();//新起一行
+			   bw.write("data1,data2,data3");//寫到新檔案中
+
+			    //用陣列讀也可以,重點是中間記得加上"逗號",才可以順利分欄位
+			    //內容中如有逗號,記得換成別的,以免被csv誤會成分欄
+
+			   }
+			   bw.close();
+			  } catch (Exception e) {
+			   // TODO Auto-generated catch block
+			   e.printStackTrace();
+			  }
+	}
+}

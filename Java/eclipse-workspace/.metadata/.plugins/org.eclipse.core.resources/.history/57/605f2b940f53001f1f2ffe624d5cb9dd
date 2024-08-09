@@ -1,0 +1,25 @@
+package animalprectice_extends;
+
+public class dog extends animal_father implements interface_pet {
+	String breed;
+	
+	@Override
+	public void play() {
+		// TODO Auto-generated method stub
+		System.out.println("Dog is playing fetch!");
+	}
+
+	@Override
+	public void makeSound() {
+		// TODO Auto-generated method stub
+		System.out.println("WOOF!");
+	}
+
+	@Override
+	public void printinfo() {
+		// TODO Auto-generated method stub
+		super.printinfo();
+		System.out.println(breed);
+	}
+	
+}

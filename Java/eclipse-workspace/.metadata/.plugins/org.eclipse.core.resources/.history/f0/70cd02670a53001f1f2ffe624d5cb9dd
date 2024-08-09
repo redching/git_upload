@@ -1,0 +1,6 @@
+package animalprectice_extends;
+
+public class interface_pet {
+	void pet() {
+	}
+}

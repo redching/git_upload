@@ -1,0 +1,31 @@
+package com.cathaybk.javaedu.lesson2.practice;
+
+import java.util.Random;
+
+import javax.sound.midi.Soundbank;
+
+import com.cathaybk.javaedu.lesson3.practice.RandomNum;
+
+import animalprectice_extends.interface_pet;
+
+public class ExceptionHandle {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Random random = new Random();
+		int number = random.nextInt(100)+1;
+		int res = number%2;
+		try {
+			if(res == 1) {
+				System.out.println("奇數：" + number);
+			} else{
+				throw new Exception("error message");
+				
+			}
+		} catch (Exception ex1) {
+			// TODO: handle exception
+			 System.out.println(ex1);
+		}
+	}
+
+}

@@ -1,0 +1,12 @@
+package com.cathaybk.practice.nt50358.b;
+
+import java.util.Random;
+
+import animalprectice_extends.interface_pet;
+import oracle.sql.NUMBER;
+
+public class prectice_two {
+	public static void main(String[] args) {
+
+	}
+}

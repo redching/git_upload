@@ -1,0 +1,11 @@
+package animalprectice_extends;
+
+public class tesst {
+	public static void main(String[] args) {
+		dog dog = new dog();
+		dog.breed = "Jay";
+		dog.makeSound();
+		dog.printinfo();
+		dog.play();
+	}
+}

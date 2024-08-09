@@ -1,0 +1,21 @@
+package com.cathaybk.practice.nt50358.b;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
+public class PrecticeTwo {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Random random = new Random();
+		List<Integer> list = new ArrayList<>();
+		for(int i = 0;i <6; i++) {
+			int number = random.nextInt();
+			list.add(number);
+		}
+		System.out.println(list);
+		
+	}
+
+}

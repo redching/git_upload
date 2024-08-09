@@ -1,0 +1,45 @@
+package com.cathaybk.practice.nt50358.b;
+
+public class Sales extends Employee {
+	private int bouns;
+	private int payment;
+
+	
+
+//	public Sales(String name, String department, int salary) {
+//		super(name, department, salary);
+//		// TODO Auto-generated constructor stub
+//	}
+
+	public Sales(String name, String department, int salary, int payment) {
+		super(name, department);
+		int bouns = (int) (payment*0.05);
+		this.payment = payment;
+		int sumsalary = salary + bouns;
+		System.out.printf("月薪：/n"+salary +"業績獎金："+ bouns + "總計：" + sumsalary);
+		System.out.println();
+	}
+
+	@Override
+	public void printinfo() {
+		// TODO Auto-generated method stub
+		super.printinfo();
+	}
+
+	public int getBouns() {
+		return bouns;
+	}
+
+	public void setBouns(int bouns) {
+		this.bouns = bouns;
+	}
+
+	public int getPayment() {
+		return payment;
+	}
+
+	public void setPayment(int payment) {
+		this.payment = payment;
+	}
+	
+}

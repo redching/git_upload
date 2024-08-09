@@ -1,0 +1,111 @@
+package com.cathaybk.practice.nt50358.b;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
+public class PrecticeThree {
+	public static void main(String[] args) {
+		List<Employee> employeeList = new ArrayList<>();
+		employeeList.add(new Sales("張志城","信用卡部", 35000, 6000));
+		employeeList.add(new Sales("林大鈞","保代部", 38000, 4000));
+		employeeList.add(new Supervisor("張志城","信用卡部", 65000));
+		employeeList.add(new Supervisor("張志城","信用卡部", 80000));
+		for(Employee employee : employeeList) {
+			employee.printinfo();
+		}
+		BufferedWriter fw = null;
+		try {
+		  File file = new File("filename.csv");
+		  fw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), "UTF-8")); // 指點編碼格式，以免讀取時中文字符異常
+		  fw.append("input sentence 1 ");
+		  fw.newLine();
+		  fw.append("input sentence 2 ");
+		  fw.flush(); // 全部寫入緩存中的內容
+		} catch (Exception e) {
+		  e.printStackTrace();
+		} finally {
+		  if (fw != null) {
+		  try {
+		    fw.close();
+		  } catch (IOException e) {
+		    e.printStackTrace();
+		  }
+		}
+	}
+//	public static void csvwriter(List<LinkedHashMap<String, String>> mapList, String[] headers, String filePath)
+//            throws IOException {
+//        check(mapList, headers, filePath);
+//        //判断是否有源文件，如果有就追加写入
+//        if (!readCsv(filePath)){
+//
+//            FileOutputStream fos = null;
+//            //需要UTF-8-BOM编码
+//            byte[] uft8bom={(byte)0xef,(byte)0xbb,(byte)0xbf};
+//            fos = new FileOutputStream(filePath, true);
+//            fos.write(uft8bom);
+//            //第一次写入
+//            try (PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(fos, "UTF-8"))) {
+//                StringBuilder builder = new StringBuilder();
+//                for(String header : headers) {
+//                    builder.append(header).append(",");
+//                }
+//                builder.deleteCharAt(builder.length() - 1);
+//                printWriter.println(builder.toString());
+//                builder.delete(0, builder.length());
+//                for (LinkedHashMap<String, String> map : mapList) {
+//                    for (Map.Entry<String, String> entry : map.entrySet()) {
+//                        builder.append(entry.getValue()).append(",");
+//                    }
+//                    builder.deleteCharAt(builder.length() - 1);
+//                    printWriter.println(builder.toString());
+//                    builder.delete(0, builder.length());
+//                }
+//            }
+//        }else {
+//            //追加写入
+////            File csvFile = new File(filePath);
+//            try{
+//                FileOutputStream fos = null;
+//                //需要UTF-8-BOM编码
+//                byte[] uft8bom={(byte)0xef,(byte)0xbb,(byte)0xbf};
+//                fos = new FileOutputStream(filePath, true);
+//                fos.write(uft8bom);
+//                BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos, "UTF-8"), 1024);
+//
+//                //遍历所有数据
+//                for (LinkedHashMap<String, String> map : mapList) {
+//                    StringBuilder builder = new StringBuilder();
+//                    for (Map.Entry<String, String> entry : map.entrySet()) {
+//                        builder.append(entry.getValue()).append(",");
+//                    }
+//                    builder.append("\r\n");
+//                    bw.write(builder.toString());
+//                }
+//                bw.flush();
+//                bw.close();
+//
+//            }catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
+//    }
+//	private static boolean readCsv(String filePath) {
+//		// TODO Auto-generated method stub
+//		return false;
+//	}
+//	private static void check(List<LinkedHashMap<String, String>> mapList, String[] headers, String filePath) {
+//		// TODO Auto-generated method stub
+		
+//	}
+	
+}

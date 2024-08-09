@@ -1,0 +1,8 @@
+package precticepage60;
+
+public class LangStudent extends student {
+	private void LangStudent() {
+		// TODO Auto-generated method stub
+		System.out.println();
+	}
+}
