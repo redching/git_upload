@@ -7,8 +7,9 @@ public abstract class Employee implements IWork {
 
 	@Override
 	public void printinfo() {
-		// TODO Auto-generated method stub
-		System.out.printf("薪資單" + "\n姓名：" + name + " 部門：" + department + "\n月薪：" + salary);
+		StringBuilder empSBuilder = new StringBuilder();
+		empSBuilder = empSBuilder.append("薪資單").append("\n姓名：").append(name).append(" 部門：").append(department).append("\n月薪：").append(salary);
+		System.out.print(empSBuilder);
 	}
 
 	public String getName() {
@@ -35,27 +36,9 @@ public abstract class Employee implements IWork {
 		this.salary = salary;
 	}
 
-	public Employee(String name, String department, int salary) {
+	public Employee(String name, String department, int salary) {//建構子在最上面
 		this.name = name;
 		this.department = department;
 		this.salary = salary;
 	}
-
-//	public abstract String toCSV() {
-//		df
-//	}
-
-//	public Employee(String name2, String department2, int salary2) {
-//		// TODO Auto-generated constructor stub
-//	}
-
-//	public Employee(String name, String department , int salary) {
-//		
-//		this.name = name;
-//		this.department = department;
-//		this.salary = salary;
-////		this.salary = salary;
-////		System.out.println("姓名："+name+"部門："+department);
-//	}
-
 }

@@ -91,9 +91,6 @@ public class PracticeSeven {
 				Car car = new Car(queryResultSet.getString("MANUFACTURER"), queryResultSet.getString("TYPE"),
 						queryResultSet.getString("MIN_PRICE"), queryResultSet.getString("PRICE"));
 				carList.add(car);
-//				System.out.printf("製造商：%s，型號：%s，售價：%s，底價：%s", queryResultSet.getString("MANUFACTURER"),
-//						queryResultSet.getString("TYPE"), queryResultSet.getString("MIN_PRICE"),
-//						queryResultSet.getString("PRICE"));
 
 			}
 			if (carList.size() > 0) {

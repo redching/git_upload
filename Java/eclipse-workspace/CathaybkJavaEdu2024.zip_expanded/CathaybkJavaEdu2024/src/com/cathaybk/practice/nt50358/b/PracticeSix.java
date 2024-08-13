@@ -45,7 +45,7 @@ public class PracticeSix {
 					public int compare(Map<String, String> o1, Map<String, String> o2) {
 						BigDecimal prBigDecimalo1 = new BigDecimal(o1.get("Price"));
 						BigDecimal prBigDecimalo2 = new BigDecimal(o2.get("Price"));
-						return prBigDecimalo1.compareTo(prBigDecimalo2);
+						return prBigDecimalo2.compareTo(prBigDecimalo1);
 					}
 
 				});
@@ -53,7 +53,7 @@ public class PracticeSix {
 			}
 			StringBuilder csvContent = new StringBuilder();
 			try (BufferedWriter writer = new BufferedWriter(
-					new FileWriter("C:\\\\Users\\\\Admin\\\\Desktop\\\\Java班\\\\git_upload\\\\Java\\\\cars2.csv",
+					new FileWriter("C:\\Users\\Admin\\Desktop\\Java班\\git_upload\\Java\\cars2.csv",
 							StandardCharsets.UTF_8))) {
 
 				csvContent.append("Manufacturer").append(",").append("TYPE").append(",").append("Min.PRICE").append(",")
@@ -65,7 +65,7 @@ public class PracticeSix {
 				}
 				writer.write(csvContent.toString());
 				csvContent.setLength(0);
-				System.out.println("成功匯出csv");
+				
 			} catch (IOException e) {
 				e.printStackTrace();
 

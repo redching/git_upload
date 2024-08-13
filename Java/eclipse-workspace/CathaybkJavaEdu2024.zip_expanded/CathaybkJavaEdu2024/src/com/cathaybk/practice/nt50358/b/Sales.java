@@ -4,24 +4,19 @@ public class Sales extends Employee {
 	private int bouns;
 	private int payment;
 
-//	public Sales(String name, String department, int salary) {
-//		super(name, department, salary);
-//		// TODO Auto-generated constructor stub
-//	}
+	public Sales(String name, String department, int salary, int sale) {
 
-	public Sales(String name, String department, int salary, int bouns) {
 		super(name, department, salary);
-		this.bouns = (int) (bouns * 0.05);
+		this.bouns = (int) (sale * 0.05);
 		this.payment = salary + this.bouns;
-//		int sumsalary = salary + bouns;
-
 	}
 
 	@Override
 	public void printinfo() {
-		// TODO Auto-generated method stub
 		super.printinfo();
-		System.out.println("\n業績獎金：" + bouns + "\n總計：" + payment);
+		StringBuilder salesSBuilder = new StringBuilder();
+		salesSBuilder = salesSBuilder.append("\n業績獎金：").append(bouns).append("\n總計：").append(payment);
+		System.out.println(salesSBuilder.toString());
 	}
 
 	public int getBouns() {

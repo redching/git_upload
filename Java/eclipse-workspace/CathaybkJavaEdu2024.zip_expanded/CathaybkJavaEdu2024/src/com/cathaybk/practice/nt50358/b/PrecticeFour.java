@@ -40,6 +40,7 @@ public class PrecticeFour {
                     builder.delete(0, builder.length());
                 }
             }
+       
         }else {
             //追加写入
 //            File csvFile = new File(filePath);

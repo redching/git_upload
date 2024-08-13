@@ -40,10 +40,6 @@ public class PrecticeThree {
 
 		}
 
-		//
-		System.out.println("成功匯出CSV檔");
-//
-
 	}
 
 }
