@@ -11,26 +11,27 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 public class PracticeSix {
 
 	public static void main(String[] args) {
+		List<Map<String, String>> carList = new ArrayList<>();
 		try {
-			InputStreamReader isr = new InputStreamReader(
-					new FileInputStream("C:\\Users\\Admin\\Desktop\\Java班\\git_upload\\Java\\Java評量_第6題cars.csv"));// 檔案讀取路徑
+			InputStreamReader isr = new InputStreamReader(new FileInputStream("Java評量_第6題cars.csv"));// 檔案讀取路徑
 			BufferedReader reader = new BufferedReader(isr);
-			String line = null;
-			List<Map<String, String>> carList = new ArrayList<>();
-			line = reader.readLine();
+			String line = reader.readLine();
 			while ((line = reader.readLine()) != null) {
-				Map<String, String> map = new LinkedHashMap<String, String>();
+				Map<String, String> map = new HashMap<String, String>();
 				String item[] = line.split(",");
 				/** 讀取 **/
-				String Manufacturer = item[0].trim();
+				String Manufacturer = item[0].trim();// 小駝峰
 				String TYPE = item[1].trim();
 				String minPRICE = item[2].trim();
 				String Price = item[3].trim();
@@ -40,7 +41,7 @@ public class PracticeSix {
 				map.put("Price", Price);
 				carList.add(map);
 				Collections.sort(carList, new Comparator<Map<String, String>>() {
-
+				
 					@Override
 					public int compare(Map<String, String> o1, Map<String, String> o2) {
 						BigDecimal prBigDecimalo1 = new BigDecimal(o1.get("Price"));
@@ -49,72 +50,81 @@ public class PracticeSix {
 					}
 
 				});
-				System.out.println(map.values());
 			}
-			StringBuilder csvContent = new StringBuilder();
-			try (BufferedWriter writer = new BufferedWriter(
-					new FileWriter("C:\\Users\\Admin\\Desktop\\Java班\\git_upload\\Java\\cars2.csv",
-							StandardCharsets.UTF_8))) {
-
-				csvContent.append("Manufacturer").append(",").append("TYPE").append(",").append("Min.PRICE").append(",")
-						.append("Price").append(",").append("\n");
-				for (Map<String, String> map : carList) {
-
-					csvContent.append(map.get("Manufacturer")).append(",").append(map.get("TYPE")).append(",")
-							.append(map.get("Min.PRICE")).append(",").append(map.get("Price")).append(",").append("\n");
-				}
-				writer.write(csvContent.toString());
-				csvContent.setLength(0);
-				
-			} catch (IOException e) {
-				e.printStackTrace();
-
-			}
-			try {
-				Collections.sort(carList, new Comparator<Map<String, String>>() {
-
-					@Override
-					public int compare(Map<String, String> o1, Map<String, String> o2) {
-						return o1.get("Manufacturer").compareTo(o2.get("Manufacturer"));
-					}
-
-				});
-				TreeSet<String> carset = new TreeSet<>();
-
-				for (Map<String, String> carsetmanuString : carList) {
-					carset.add(carsetmanuString.get("Manufacturer"));
-				}
-
-				System.out.printf("%-15s%-8s%-12s%-7s\n", "Manufacturer", "TYPE", "Min.PRICE", "Price");
-				BigDecimal totalPricebigDecimal = new BigDecimal(0);
-				BigDecimal totalMinPricebigDecimal = new BigDecimal(0);
-
-				for (String eachkey : carset) { // 每一項key值
-					BigDecimal eachPriceBigDecimal = new BigDecimal(0);// 小記
-					BigDecimal eachMinPriceBigDecimal = new BigDecimal(0);
-					for (Map<String, String> eachvalueMap : carList) {
-						if (eachkey.equals(eachvalueMap.get("Manufacturer"))) {
-							System.out.printf("%2s%-12s%-10s%5s%10s\n", "", eachvalueMap.get("Manufacturer"),
-									eachvalueMap.get("TYPE"), eachvalueMap.get("Min.PRICE"), eachvalueMap.get("Price"));
-							eachPriceBigDecimal = eachPriceBigDecimal.add(new BigDecimal(eachvalueMap.get("Price")));
-							eachMinPriceBigDecimal = eachMinPriceBigDecimal
-									.add(new BigDecimal(eachvalueMap.get("Min.PRICE")));
-						}
-
-					}
-
-					System.out.printf("小計%-11s%-10s%5s%10s\n", "", "", eachMinPriceBigDecimal, eachPriceBigDecimal);
-					totalPricebigDecimal = totalPricebigDecimal.add(eachPriceBigDecimal);
-					totalMinPricebigDecimal = totalMinPricebigDecimal.add(eachMinPriceBigDecimal);
-				}
-				System.out.printf("合計%-11s%-10s%5s%10s\n", "", "", totalMinPricebigDecimal, totalPricebigDecimal);
-			} catch (Exception e) {
-			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter("cars2.csv", StandardCharsets.UTF_8))) {
+
+			StringBuilder csvContent = new StringBuilder();
+			csvContent.append("Manufacturer").append(",").append("TYPE").append(",").append("Min.PRICE").append(",")
+					.append("Price").append(",").append("\n");
+			for (Map<String, String> map : carList) {
+
+				csvContent.append(map.get("Manufacturer")).append(",").append(map.get("TYPE")).append(",")
+						.append(map.get("Min.PRICE")).append(",").append(map.get("Price")).append(",").append("\n");
+			}
+			writer.write(csvContent.toString());
+
+		} catch (IOException e) {
+			e.printStackTrace();
+
+		}
+		try {
+			Collections.sort(carList, new Comparator<Map<String, String>>() {
+
+				@Override
+				public int compare(Map<String, String> o1, Map<String, String> o2) {
+					return o1.get("Manufacturer").compareTo(o2.get("Manufacturer"));
+				}
+
+			});
+			TreeSet<String> carset = new TreeSet<>();
+
+			for (Map<String, String> carsetmanuString : carList) {
+				carset.add(carsetmanuString.get("Manufacturer"));
+			}
+
+			System.out.printf("%-14s%-9s%11s%7s\n", "Manufacturer", "TYPE", "Min.PRICE", "Price");
+			BigDecimal totalPricebigDecimal = BigDecimal.ZERO;
+			BigDecimal totalMinPricebigDecimal = BigDecimal.ZERO;
+			
+			ArrayList<BigDecimal> totalCarsPrice = new ArrayList<>();
+            ArrayList<BigDecimal> totalCarsMinPrice = new ArrayList<>();
+            TreeMap<String, List<Map<String, String>>> groupByManufacturer = new TreeMap<>();
+            for (Map<String, String> car : carList) {
+                String manufacturer = car.get("Manufacturer");
+                if (!groupByManufacturer.containsKey(manufacturer)) {
+                    List<Map<String, String>> cars = new ArrayList<>();
+                    groupByManufacturer.put(manufacturer, cars);
+                }
+                groupByManufacturer.get(manufacturer).add(car);
+            }
+		    for (String manufacturer : groupByManufacturer.keySet()) {
+              List<Map<String, String>> cars = groupByManufacturer.get(manufacturer);
+              BigDecimal total_manu_price = BigDecimal.ZERO;
+              BigDecimal total_manu_min_price = BigDecimal.ZERO;
+              for (Map<String, String> map : cars) {
+                  System.out.printf("%-14s%-9s%11s%7s\n", manufacturer, map.get("TYPE"), map.get("Min.PRICE"), map.get("Price"));
+                  total_manu_price = total_manu_price.add(new BigDecimal(map.get("Price")));
+                  total_manu_min_price = total_manu_min_price.add(new BigDecimal(map.get("Min.PRICE")));
+
+              }
+              System.out.printf("%-22s%11s%7s\n", "小計", total_manu_min_price, total_manu_price);
+              totalCarsPrice.add(total_manu_price);
+              totalCarsMinPrice.add(total_manu_min_price);
+          }
+          BigDecimal total_price = BigDecimal.ZERO;
+          BigDecimal total_min_price = BigDecimal.ZERO;
+          for (int i = 0; i < totalCarsMinPrice.size(); i++) {
+              total_price = total_price.add(totalCarsPrice.get(i));
+              total_min_price = total_min_price.add(totalCarsMinPrice.get(i));
+          }
+          System.out.printf("%-22s%11s%7s\n", "合計", total_min_price, total_price);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
