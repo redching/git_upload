@@ -61,14 +61,13 @@
         radio.style.border = '1px'
         radio.setAttribute('type', 'radio');
         radio.setAttribute('name', 'radio');
+        radio.setAttribute('class', 'radio');
         td.appendChild(radio);
-        // radio.addEventListener('change', function () {
-        //     let manuFactures = document.getElementById("manuFacture").value;
-        //     let cateGories = document.getElementById("cateGory").value;
-        //     let lowPrices = document.getElementById("lowPrice").value;
-        //     let prices = document.getElementById("price").value;
-
-        // });
+        radio.addEventListener('change', function () {
+            const radioselect = document.getElementsByName('radio');
+            console.log(radioselect)
+        //當我select到radio哦時候可以取得同一行的其他數值
+        });
         return td;
     }
     function createDeleteBtn(tr) {
@@ -80,7 +79,6 @@
             tr.remove()//*************************************
             const rows = document.getElementsByClassName('trClass')
             for (let i = 0; i < rows.length; i++) {
-                console.log(rows[i].getElementsByTagName('td')[1])
                 rows[i].getElementsByTagName('td')[1].innerText = i + 1;
             }
 
