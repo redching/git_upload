@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        hr {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        .button {
+            margin: 10px;
+            ;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="get">
+        <table>
+            <tr>
+                <td>KEY</td>
+                <th><input id="keyInput" type="text"></th>
+            </tr>
+            <tr>
+                <td>VALUE</td>
+                <th><input id="valueInput" type="text"></th>
+
+            </tr>
+        </table>
+        <hr>
+        <button id="putBtn" class="button" type="button">PUT</button>
+        <button id="clearBtn" class="button" type="button">CLEAR</button>
+        <hr>
+    </form>
+    <p>【RESULT】</p>
+    <label id="resLabel" for=""></label>
+</body>
+<script src="HashMap.js">
+</script>
+<script>
+    const map = new HashMap();
+    let valueInputText = document.getElementById("valueInput");
+    let keyInputText = document.getElementById("keyInput");
+    const putBtn = document.getElementById('putBtn');
+    const clearBtn = document.getElementById('clearBtn');
+
+    const resLabel = document.getElementById("resLabel");
+
+    putBtn.addEventListener("click", function () {
+        keyInputTextStr = keyInputText.value
+        valueInputTextStr = valueInputText.value;
+        if (keyInputTextStr === '') {
+            alert("Please enter")
+        } else {
+            map.put(keyInputTextStr, valueInputTextStr);
+            resLabel.innerText = map.keys()
+            
+        }
+    });
+    clearBtn.addEventListener("click", function () {
+        map.clear();
+        resLabel.innerText = map.keys()
+    });
+</script>
+
+</html>
