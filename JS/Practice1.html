@@ -16,6 +16,39 @@
             ;
         }
     </style>
+    <script src="HashMap.js" defer>
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const map = new HashMap();
+            let valueInputText = document.getElementById('valueInput');
+            let keyInputText = document.getElementById('keyInput');
+            const putBtn = document.getElementById('putBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const resLabel = document.getElementById('resLabel');
+
+            putBtn.addEventListener('click', function () {
+                keyInputTextStr = keyInputText.value.trim();
+                valueInputTextStr = valueInputText.value.trim();
+                if (keyInputTextStr === '') {
+                    alert('請輸入KEY值')
+                } 
+                else {
+                    if(map.contains(keyInputTextStr)){
+                     alert('Key already exists!');
+                     return;   
+                    }
+                    map.put(keyInputTextStr, valueInputTextStr);
+                    resLabel.innerText = map.keys()
+
+                }
+            });
+            clearBtn.addEventListener('click', function () {
+                map.clear();
+                resLabel.innerText = map.keys()
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -39,32 +72,5 @@
     <p>【RESULT】</p>
     <label id="resLabel" for=""></label>
 </body>
-<script src="HashMap.js">
-</script>
-<script>
-    const map = new HashMap();
-    let valueInputText = document.getElementById("valueInput");
-    let keyInputText = document.getElementById("keyInput");
-    const putBtn = document.getElementById('putBtn');
-    const clearBtn = document.getElementById('clearBtn');
-
-    const resLabel = document.getElementById("resLabel");
-
-    putBtn.addEventListener("click", function () {
-        keyInputTextStr = keyInputText.value
-        valueInputTextStr = valueInputText.value;
-        if (keyInputTextStr === '') {
-            alert("Please enter")
-        } else {
-            map.put(keyInputTextStr, valueInputTextStr);
-            resLabel.innerText = map.keys()
-            
-        }
-    });
-    clearBtn.addEventListener("click", function () {
-        map.clear();
-        resLabel.innerText = map.keys()
-    });
-</script>
 
 </html>

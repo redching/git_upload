@@ -10,6 +10,115 @@
             padding: 15px;
         }
     </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            function creatTd(value) {
+                const td = document.createElement('td');
+                td.innerText = value;
+                return td;
+            }
+            function createRadio() {
+                const td = document.createElement('td');
+                const radio = document.createElement('input');
+                radio.style.border = '1px'
+                radio.setAttribute('type', 'radio');
+                radio.setAttribute('name', 'radio');
+                radio.setAttribute('class', 'radio');
+                td.appendChild(radio);
+                radio.addEventListener('change', function () {
+                    const radioselect = document.getElementsByName('radio');
+                    let manuFactures = document.getElementById('manuFacture').value;
+                    let cateGories = document.getElementById('cateGory').value;
+                    let lowPrices = document.getElementById('lowPrice').value;
+                    let prices = document.getElementById('price').value;
+                    for (let i = 0; i < radioselect.length; i++) {
+                        if (radioselect[i].checked) {
+                            document.getElementById('manuFacture').value = radioselect[i].parentNode.parentNode.getElementsByTagName('td')[2].innerText
+                            document.getElementById('cateGory').value = radioselect[i].parentNode.parentNode.getElementsByTagName('td')[3].innerText
+                            document.getElementById('lowPrice').value = radioselect[i].parentNode.parentNode.getElementsByTagName('td')[4].innerText
+                            document.getElementById('price').value = radioselect[i].parentNode.parentNode.getElementsByTagName('td')[5].innerText
+                            break;
+                        }
+                    }
+                });
+                return td;
+            }
+            function createDeleteBtn(tr) {
+                const td = document.createElement('td');
+                const btn = document.createElement('button');
+                btn.innerText = '刪除';
+                td.appendChild(btn)
+                btn.addEventListener('click', function () {
+                    tr.remove()
+                    const rows = document.getElementsByClassName('trClass')
+                    for (let i = 0; i < rows.length; i++) {
+                        rows[i].getElementsByTagName('td')[1].innerText = i + 1;
+                    }
+
+                });
+                return td;
+            }
+            function rowscount() {
+                const rows = document.getElementsByClassName('trClass')
+
+                return rows.length;
+            }
+            const addBtn = document.getElementById('addBtn');
+            const modBtn = document.getElementById('modBtn');
+            const clearBtn = document.getElementById('clearBtn');
+            const resTable = document.getElementById('resTable');
+            const resTableTr = document.getElementById('resTableTr');
+            addBtn.addEventListener('click', function () {                                  //加入資料
+                let manuFactures = document.getElementById('manuFacture').value.trim();
+                let cateGories = document.getElementById('cateGory').value.trim();
+                let lowPrices = document.getElementById('lowPrice').value;
+                let prices = document.getElementById('price').value;
+                if (manuFactures != '' && cateGories != '') {
+                    const radioButton = document.createElement('input');
+                    radioButton.setAttribute('type', 'radio');
+                    const newResult = document.createElement('tr')
+                    newResult.setAttribute('class', 'trClass')
+                    newResult.appendChild(createRadio())
+                    newResult.appendChild(creatTd(rowscount() + 1))
+                    newResult.appendChild(creatTd(manuFactures))
+                    newResult.appendChild(creatTd(cateGories))
+                    newResult.appendChild(creatTd(lowPrices))
+                    newResult.appendChild(creatTd(prices))
+                    newResult.appendChild(createDeleteBtn(newResult));
+                    resTable.appendChild(newResult);
+                } else {
+                    alert('請輸入至造商和類別')
+                }
+            })
+            clearBtn.addEventListener('click', function () {                                //清除資料
+                const trClass = document.getElementsByClassName('trClass');
+                while (trClass.length > 0) {
+                    trClass[0].remove();
+                }
+            })
+            modBtn.addEventListener('click', function () {
+                const radioselect = document.getElementsByName('radio');
+                let manuFactures = document.getElementById('manuFacture').value.trim();
+                let cateGories = document.getElementById('cateGory').value.trim();
+                let lowPrices = document.getElementById('lowPrice').value;
+                let prices = document.getElementById('price').value;
+                for (let i = 0; i < radioselect.length; i++) {
+                    if (radioselect[i].checked) {
+                        if (manuFactures != '' && cateGories != '') {
+                            radioselect[i].parentNode.parentNode.getElementsByTagName('td')[2].innerText = document.getElementById('manuFacture').value;
+                            radioselect[i].parentNode.parentNode.getElementsByTagName('td')[3].innerText = document.getElementById('cateGory').value;
+                            radioselect[i].parentNode.parentNode.getElementsByTagName('td')[4].innerText = document.getElementById('lowPrice').value;
+                            radioselect[i].parentNode.parentNode.getElementsByTagName('td')[5].innerText = document.getElementById('price').value;
+                            break;
+                        }
+                        else {
+                            alert('請輸入製造商和類別')
+                        }
+                    }
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -35,7 +144,6 @@
                 </td>
             </tr>
         </table>
-
         <table id="resTable" border="1" style="margin-top: 20px; border-collapse: collapse;">
             <tr>
                 <td></td>
@@ -49,103 +157,5 @@
         </table>
     </form>
 </body>
-<script>
-    function creatTd(value) {
-        const td = document.createElement('td');
-        td.innerText = value;
-        return td;
-    }
-    function createRadio() {
-        const td = document.createElement('td');
-        const radio = document.createElement('input');
-        radio.style.border = '1px'
-        radio.setAttribute('type', 'radio');
-        radio.setAttribute('name', 'radio');
-        radio.setAttribute('class', 'radio');
-        td.appendChild(radio);
-        radio.addEventListener('change', function () {
-            const radioselect = document.getElementsByName('radio');
-            console.log(radioselect)
-        //當我select到radio哦時候可以取得同一行的其他數值
-        });
-        return td;
-    }
-    function createDeleteBtn(tr) {
-        const td = document.createElement('td');
-        const btn = document.createElement('button');
-        btn.innerText = '刪除';
-        td.appendChild(btn)
-        btn.addEventListener('click', function () {
-            tr.remove()//*************************************
-            const rows = document.getElementsByClassName('trClass')
-            for (let i = 0; i < rows.length; i++) {
-                rows[i].getElementsByTagName('td')[1].innerText = i + 1;
-            }
-
-        });
-        return td;
-    }
-    function rowscount() {
-        const rows = document.getElementsByClassName('trClass')
-
-        console.log(rows.length)
-        return rows.length;
-    }
-
-    const addBtn = document.getElementById("addBtn");
-    const modBtn = document.getElementById("modBtn");
-    const clearBtn = document.getElementById("clearBtn");
-    const resTable = document.getElementById("resTable");
-    const resTableTr = document.getElementById("resTableTr");
-
-    addBtn.addEventListener('click', function () {
-        let manuFactures = document.getElementById("manuFacture").value;
-        let cateGories = document.getElementById("cateGory").value;
-        let lowPrices = document.getElementById("lowPrice").value;
-        let prices = document.getElementById("price").value;
-
-        if (manuFactures != "" && cateGories != "") {
-
-            const radioButton = document.createElement('input');
-            radioButton.setAttribute('type', 'radio');
-            const newResult = document.createElement('tr')
-            newResult.setAttribute('class', 'trClass')
-            // newResult. 
-            newResult.appendChild(createRadio())
-            newResult.appendChild(creatTd(rowscount() + 1))
-            newResult.appendChild(creatTd(manuFactures))
-            newResult.appendChild(creatTd(cateGories))
-            newResult.appendChild(creatTd(lowPrices))
-            newResult.appendChild(creatTd(prices))
-            newResult.appendChild(createDeleteBtn(newResult));
-
-            resTable.appendChild(newResult);
-        } else {
-            alert('請輸入至造商和類別')
-        }
-
-
-        // if (manuFactures !== '' && cateGories !== '') {
-
-        //     
-        //     
-        // }
-        // alert('請輸入')
-    })
-    clearBtn.addEventListener('click', function () {
-        const trClass = document.getElementsByClassName('trClass');
-        while (trClass.length > 0) {
-            trClass[0].remove();
-
-        }
-    })
-</script>
 
 </html>
-<!-- 
-
-
-
-(5) 按下 radio ，將該列資訊帶入上方輸入欄 。
-(6) 按下「修改」 ，檢核下方有點選 radio 、製造商與 類別不 可空白 ，通過即依
-輸入欄更新下方該列相關欄位。 -->
