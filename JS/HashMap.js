@@ -6,52 +6,28 @@ var HashMap = function () {
             map[k] = v;
         },
         keys: function () {
-            let mapstring = '';
-            let mapres = [];
-            let keylist = []
-            let varlist = []
+            let keylist = [];
             for (const key in map) {
                 keylist.push(key);
-                varlist.push(map[key]);
             }
-            for (let i = 0; i < keylist.length; i++) {
-                let key = keylist[i];
-                let varr = varlist[i];
-                let result = key + ':' + varr;
-                mapres.push(result);
-                mapstring += result + '\n'
-            }
-            
-            return mapstring;
-            
+            return keylist;
+
         },
         contains: function (k) {
-            let res;
             for (const key in map) {
                 if (key == k) {
-                    res = true
-                    return res
-                } else {
-                    res = false
+                    return true;
                 }
             }
-            // 
-            // if(){
-            //     res = true;
-            // }else{
-            //     res = false;
-            // }
-
-            return res;
+            return false;
         },
-        get: function (k) {
-            const keyss = k
-            return keyss;
+        get: function (k) {//*
+            return map[k];
         },
         clear: function () {
-            map = {}
+            map = {};
         }
 
-    };
+    }
 
-};
+}

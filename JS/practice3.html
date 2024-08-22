@@ -1,0 +1,50 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>心理測驗看「減肥會成功or失敗」</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid #333;
+        }
+    </style>
+    <script src="psychometricTestArray.js" defer></script>
+    <!-- <script src="psychometricTestObject.js" defer></script> -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function(){
+            const content = document.getElementById('content');
+            const table = document.createElement('table');
+            div.setAttribute('id', 'questionsTable');
+            content.addchild(table);
+            const tr = document.createElement('tr');
+            for (let i = 0; i < psychometricTestArray.length; i++) {
+                console.log(psychometricTest[i])
+            }
+
+        });
+    </script>
+</head>
+
+<body>
+    <h1>心理測驗看「減肥會成功or失敗」</h1>
+    <p>減重方式五花八門，你確定自己適合哪種減重方式嗎？</p>
+    <p>做個心理測驗試試看吧？</p>
+    <p>心理測驗來源： <a href="https://www.facebook.com/RDJIAHUEI/?locale=zh_TW">李佳蕙營養師</a></p>
+    <br>
+    <hr>
+    <table border="1" id="content">
+        <tr>
+            <th>題號</th>
+            <th>題目</th>
+            <th>選項</th>
+            <th></th>
+        </tr>
+    </table>
+    <br>
+    <div id="resultDiv"></div>
+
+</body>
+
+</html>
