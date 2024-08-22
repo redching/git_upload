@@ -24,7 +24,6 @@
 
         document.getElementById('putBtn').addEventListener('click', function () {
           keyInputTextStr = keyInputText.value.trim();
-          valueInputTextStr = valueInputText.value.trim();
           if (!keyInputTextStr) {
             alert('KEY值不能空白');
             return;
@@ -34,20 +33,19 @@
             alert('KEY值不能重複');
             return;
           }
-          let keyAndValue = '';
-          map.put(keyInputTextStr, valueInputTextStr);
-          for(let i = 0; i < map.keys().length; i++) {
-            keyAndValue += map.keys()[i] + ':' + map.get(map.keys()[i]) + '\n';
-          }
-          resLabel.innerText = keyAndValue;
+          
+          map.put(keyInputTextStr, valueInputText.value.trim());
+          resLabel.innerText += keyInputTextStr+ ':' + valueInputText.value.trim() + '\n';
         });
         document.getElementById('clearBtn').addEventListener('click', function () {
           map.clear();
-          resLabel.innerText = map.keys();
+          resLabel.innerText = '';
           valueInputText.value = '';
           keyInputText.value = '';
         });
+        
       });
+      
     </script>
   </head>
 

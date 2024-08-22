@@ -10,20 +10,38 @@
             border: 1px solid #333;
         }
     </style>
-    <script src="psychometricTestArray.js" defer></script>
-    <!-- <script src="psychometricTestObject.js" defer></script> -->
+    <!-- <script src="psychometricTestArray.js" defer></script> -->
+    <script src="psychometricTestObject.js" defer></script>
     <script>
         document.addEventListener("DOMContentLoaded", function(){
             const content = document.getElementById('content');
-            const table = document.createElement('table');
-            div.setAttribute('id', 'questionsTable');
-            content.addchild(table);
             const tr = document.createElement('tr');
-            for (let i = 0; i < psychometricTestArray.length; i++) {
-                console.log(psychometricTest[i])
-            }
+            // for (let i = 0; i < psychometricTest.length; i++) {
+            //     console.log(psychometricTest[i])
+            // }
+            // for(let value of psychometricTest){
+            //     console.log(value);
+            // }
+            setQuestion('Q1');
+            
 
         });
+        function setQuestion(q1){
+            const questionTr = document.createElement('tr');
+            const questionNum = document.createElement('th');
+            const question = document.createElement('th');
+            const options = document.createElement('th');
+            const buttontd = document.createElement('th');
+            const nextbutton = document.createElement('button');
+            questionTr.appendChild(questionNum);
+            questionTr.appendChild(question);
+            questionTr.appendChild(options);
+            questionTr.appendChild(buttontd);
+            buttontd.appendChild(nextbutton);
+            nextbutton.innerText = '下一題';
+            document.getElementById('content').appendChild(questionTr);
+            console.log(psychometricTest[q1]['question']);
+        }
     </script>
 </head>
 
