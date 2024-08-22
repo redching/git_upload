@@ -40,6 +40,9 @@
             buttontd.appendChild(nextbutton);
             nextbutton.innerText = '下一題';
             document.getElementById('content').appendChild(questionTr);
+            questionNum.innerText = q1;
+            question.innerText = psychometricTest[q1]['question'];
+            
             console.log(psychometricTest[q1]['question']);
         }
     </script>

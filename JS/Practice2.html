@@ -10,39 +10,39 @@
       }
     </style>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
+      document.addEventListener('DOMContentLoaded', function () {
         function creatTd(value) {
-          const td = document.createElement("td");
+          const td = document.createElement('td');
           td.innerText = value;
           return td;
         }
         function createRadio() {
-          const td = document.createElement("td");
-          const radio = document.createElement("input");
-          radio.style.border = "1px";
-          radio.setAttribute("type", "radio");
-          radio.setAttribute("name", "radio");
-          radio.setAttribute("class", "radio");
+          const td = document.createElement('td');
+          const radio = document.createElement('input');
+          radio.style.border = '1px';
+          radio.setAttribute('type', 'radio');
+          radio.setAttribute('name', 'radio');
+          radio.setAttribute('class', 'radio');
           td.appendChild(radio);
-          radio.addEventListener("change", function () {
-            const radioselect = document.getElementsByName("radio");
+          radio.addEventListener('change', function () {
+            const radioselect = document.getElementsByName('radio');
             for (let i = 0; i < radioselect.length; i++) {
               if (radioselect[i].checked) {
-                document.getElementById("manuFacture").value =
+                document.getElementById('manuFacture').value =
                   radioselect[i].parentNode.parentNode.getElementsByTagName(
-                    "td"
+                    'td'
                   )[2].innerText;
-                document.getElementById("cateGory").value =
+                document.getElementById('cateGory').value =
                   radioselect[i].parentNode.parentNode.getElementsByTagName(
-                    "td"
+                    'td'
                   )[3].innerText;
-                document.getElementById("lowPrice").value =
+                document.getElementById('lowPrice').value =
                   radioselect[i].parentNode.parentNode.getElementsByTagName(
-                    "td"
+                    'td'
                   )[4].innerText;
-                document.getElementById("price").value =
+                document.getElementById('price').value =
                   radioselect[i].parentNode.parentNode.getElementsByTagName(
-                    "td"
+                    'td'
                   )[5].innerText;
                 break;
               }
@@ -51,39 +51,39 @@
           return td;
         }
         function createDeleteBtn(tr) {
-          const td = document.createElement("td");
-          const btn = document.createElement("button");
-          btn.innerText = "刪除";
+          const td = document.createElement('td');
+          const btn = document.createElement('button');
+          btn.innerText = '刪除';
           td.appendChild(btn);
-          btn.addEventListener("click", function () {
+          btn.addEventListener('click', function () {
             tr.remove();
-            const rows = document.getElementsByClassName("trClass");
+            const rows = document.getElementsByClassName('trClass');
             for (let i = 0; i < rows.length; i++) {
-              rows[i].getElementsByTagName("td")[1].innerText = i + 1;
+              rows[i].getElementsByTagName('td')[1].innerText = i + 1;
             }
           });
           return td;
         }
-        const addBtn = document.getElementById("addBtn");
-        const modBtn = document.getElementById("modBtn");
-        const clearBtn = document.getElementById("clearBtn");
-        const resTable = document.getElementById("resTable");
-        const resTableTr = document.getElementById("resTableTr");
-        addBtn.addEventListener("click", function () {
+        const addBtn = document.getElementById('addBtn');
+        const modBtn = document.getElementById('modBtn');
+        const clearBtn = document.getElementById('clearBtn');
+        const resTable = document.getElementById('resTable');
+        const resTableTr = document.getElementById('resTableTr');
+        addBtn.addEventListener('click', function () {
           //加入資料
           let manuFactures = document
-            .getElementById("manuFacture")
+            .getElementById('manuFacture')
             .value.trim();
-          let cateGories = document.getElementById("cateGory").value.trim();
-          let lowPrices = document.getElementById("lowPrice").value;
-          let prices = document.getElementById("price").value;
+          let cateGories = document.getElementById('cateGory').value.trim();
+          let lowPrices = document.getElementById('lowPrice').value;
+          let prices = document.getElementById('price').value;
           if (!manuFactures || !cateGories) {
-            alert("請輸入製造商和類別");
+            alert('請輸入製造商和類別');
             return;
           }
-          const newResult = document.createElement("tr");
-          const rows = document.getElementsByClassName("trClass");
-          newResult.setAttribute("class", "trClass");
+          const newResult = document.createElement('tr');
+          const rows = document.getElementsByClassName('trClass');
+          newResult.setAttribute('class', 'trClass');
           newResult.appendChild(createRadio());
           newResult.appendChild(creatTd(rows.length + 1));
           newResult.appendChild(creatTd(manuFactures));
@@ -92,28 +92,28 @@
           newResult.appendChild(creatTd(prices));
           newResult.appendChild(createDeleteBtn(newResult));
           resTable.appendChild(newResult);
-          document.getElementById("manuFacture").value = "";
-          document.getElementById("cateGory").value = "";
-          document.getElementById("lowPrice").value = "";
-          document.getElementById("price").value = "";
+          document.getElementById('manuFacture').value = '';
+          document.getElementById('cateGory').value = '';
+          document.getElementById('lowPrice').value = '';
+          document.getElementById('price').value = '';
         });
-        clearBtn.addEventListener("click", function () {
+        clearBtn.addEventListener('click', function () {
           //清除資料
-          const trClass = document.getElementsByClassName("trClass");
-          document.getElementById("manuFacture").value = "";
-          document.getElementById("cateGory").value = "";
-          document.getElementById("lowPrice").value = "";
-          document.getElementById("price").value = "";
+          const trClass = document.getElementsByClassName('trClass');
+          document.getElementById('manuFacture').value = '';
+          document.getElementById('cateGory').value = '';
+          document.getElementById('lowPrice').value = '';
+          document.getElementById('price').value = '';
           while (trClass.length > 0) {
             trClass[0].remove();
           }
         });
-        modBtn.addEventListener("click", function () {
-          const radioselect = document.getElementsByName("radio");
+        modBtn.addEventListener('click', function () {
+          const radioselect = document.getElementsByName('radio');
           let manuFactures = document
-            .getElementById("manuFacture")
+            .getElementById('manuFacture')
             .value.trim();
-          let cateGories = document.getElementById("cateGory").value.trim();
+          let cateGories = document.getElementById('cateGory').value.trim();
           let selectedRadio;
           for (let i = 0; i < radioselect.length; i++) {
             if (radioselect[i].checked) {
@@ -122,29 +122,29 @@
             }
           }
           if (!selectedRadio) {
-            alert("請選擇要修改的項目");
+            alert('請選擇要修改的項目');
             return;
           }
           if (!manuFactures || !cateGories) {
-            alert("請輸入製造商和類別");
+            alert('請輸入製造商和類別');
             return;
           }
           selectedRadio.parentNode.parentNode.getElementsByTagName(
-            "td"
-          )[2].innerText = document.getElementById("manuFacture").value;
+            'td'
+          )[2].innerText = document.getElementById('manuFacture').value;
           selectedRadio.parentNode.parentNode.getElementsByTagName(
-            "td"
-          )[3].innerText = document.getElementById("cateGory").value;
+            'td'
+          )[3].innerText = document.getElementById('cateGory').value;
           selectedRadio.parentNode.parentNode.getElementsByTagName(
-            "td"
-          )[4].innerText = document.getElementById("lowPrice").value;
+            'td'
+          )[4].innerText = document.getElementById('lowPrice').value;
           selectedRadio.parentNode.parentNode.getElementsByTagName(
-            "td"
-          )[5].innerText = document.getElementById("price").value;
-          document.getElementById("manuFacture").value = "";
-          document.getElementById("cateGory").value = "";
-          document.getElementById("lowPrice").value = "";
-          document.getElementById("price").value = "";
+            'td'
+          )[5].innerText = document.getElementById('price').value;
+          document.getElementById('manuFacture').value = '';
+          document.getElementById('cateGory').value = '';
+          document.getElementById('lowPrice').value = '';
+          document.getElementById('price').value = '';
           selectedRadio.checked = false;
         });
       });
