@@ -30,7 +30,8 @@
               let resTd =
                 radioselect[i].parentNode.parentNode.getElementsByTagName('td');
               if (radioselect[i].checked) {
-                document.getElementById('manuFacture').value = resTd[2].innerText;
+                document.getElementById('manuFacture').value =
+                  resTd[2].innerText;
                 document.getElementById('cateGory').value = resTd[3].innerText;
                 document.getElementById('lowPrice').value = resTd[4].innerText;
                 document.getElementById('price').value = resTd[5].innerText;
@@ -115,7 +116,8 @@
           let cateGories = document.getElementById('cateGory').value.trim();
           let selectedRadio;
           for (let i = 0; i < radioselect.length; i++) {
-            let resTd = selectedRadio.parentNode.parentNode.getElementsByTagName('td')
+            let resTd =
+              selectedRadio.parentNode.parentNode.getElementsByTagName('td');
             if (radioselect[i].checked) {
               selectedRadio = radioselect[i];
               break;

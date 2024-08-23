@@ -14,7 +14,7 @@
         margin: 10px;
       }
     </style>
-    <script src='HashMap.js' defer></script>
+    <script src="HashMap.js" defer></script>
     <script>
       document.addEventListener('DOMContentLoaded', function () {
         const map = new HashMap();
@@ -22,30 +22,32 @@
         let keyInputText = document.getElementById('keyInput');
         const resLabel = document.getElementById('resLabel');
 
-        document.getElementById('putBtn').addEventListener('click', function () {
-          keyInputTextStr = keyInputText.value.trim();
-          if (!keyInputTextStr) {
-            alert('KEY值不能空白');
-            return;
-          }
+        document
+          .getElementById('putBtn')
+          .addEventListener('click', function () {
+            keyInputTextStr = keyInputText.value.trim();
+            if (!keyInputTextStr) {
+              alert('KEY值不能空白');
+              return;
+            }
 
-          if (map.contains(keyInputTextStr)) {
-            alert('KEY值不能重複');
-            return;
-          }
-          let value = valueInputText.value.trim();
-          map.put(keyInputTextStr, value);
-          resLabel.innerText += keyInputTextStr+ ':' + value + '\n';
-        });
-        document.getElementById('clearBtn').addEventListener('click', function () {
-          map.clear();
-          resLabel.innerText = '';
-          valueInputText.value = '';
-          keyInputText.value = '';
-        });
-        
+            if (map.contains(keyInputTextStr)) {
+              alert('KEY值不能重複');
+              return;
+            }
+            let value = valueInputText.value.trim();
+            map.put(keyInputTextStr, value);
+            resLabel.innerText += keyInputTextStr + ':' + value + '\n';
+          });
+        document
+          .getElementById('clearBtn')
+          .addEventListener('click', function () {
+            map.clear();
+            resLabel.innerText = '';
+            valueInputText.value = '';
+            keyInputText.value = '';
+          });
       });
-      
     </script>
   </head>
 

@@ -8,7 +8,6 @@ var HashMap = function () {
       return Object.keys(map);
     },
     contains: function (k) {
-      
       return k in map;
     },
     get: function (k) {
