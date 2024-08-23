@@ -1,71 +1,103 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>心理測驗看「減肥會成功or失敗」</title>
     <style>
-        table,
-        th,
-        td {
-            border: 1px solid #333;
-        }
+      table,
+      th,
+      td {
+        border: 1px solid #333;
+      }
     </style>
     <!-- <script src="psychometricTestArray.js" defer></script> -->
     <script src="psychometricTestObject.js" defer></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function(){
-            const content = document.getElementById('content');
-            const tr = document.createElement('tr');
-            // for (let i = 0; i < psychometricTest.length; i++) {
-            //     console.log(psychometricTest[i])
-            // }
-            // for(let value of psychometricTest){
-            //     console.log(value);
-            // }
-            setQuestion('Q1');
-            
-
-        });
-        function setQuestion(q1){
-            const questionTr = document.createElement('tr');
-            const questionNum = document.createElement('th');
-            const question = document.createElement('th');
-            const options = document.createElement('th');
-            const buttontd = document.createElement('th');
-            const nextbutton = document.createElement('button');
-            questionTr.appendChild(questionNum);
-            questionTr.appendChild(question);
-            questionTr.appendChild(options);
-            questionTr.appendChild(buttontd);
-            buttontd.appendChild(nextbutton);
-            nextbutton.innerText = '下一題';
-            document.getElementById('content').appendChild(questionTr);
-            questionNum.innerText = q1;
-            question.innerText = psychometricTest[q1]['question'];
-            
-            console.log(psychometricTest[q1]['question']);
+      document.addEventListener("DOMContentLoaded", function () {
+        const content = document.getElementById("content");
+        const tr = document.createElement("tr");
+        // for (let i = 0; i < psychometricTest.length; i++) {
+        //     console.log(psychometricTest[i])
+        // }
+        // for(let value of psychometricTest){
+        //     console.log(value);
+        // }
+        setQuestion("Q1");
+      });
+      function setQuestion(q1) {
+        const questionTr = document.createElement("tr");
+        const questionNum = document.createElement("th");
+        const question = document.createElement("th");
+        const options = document.createElement("th");
+        options.setAttribute("style", "text-align:start");
+        const buttontd = document.createElement("th");
+        const nextbutton = document.createElement("button");
+        questionTr.appendChild(questionNum);
+        questionTr.appendChild(question);
+        questionTr.appendChild(options);
+        questionTr.appendChild(buttontd);
+        buttontd.appendChild(nextbutton);
+        nextbutton.innerText = "下一題";
+        questionNum.innerText = q1;
+        console.log(q1)
+        console.log(psychometricTest[q1])
+        question.innerText = psychometricTest[q1]["question"];
+        console.log(psychometricTest[q1]["question"])
+        for (let i = 0; i < psychometricTest[q1]["ans"].length; i++) {
+          const labelConInput = document.createElement("label");
+          labelConInput.setAttribute("style", "display:block;");
+        //   labelConInput.setAttribute('style', '');
+          const input = document.createElement("input");
+          input.setAttribute("type", "radio");
+          input.setAttribute("name", "radio");
+          const textnode = document.createTextNode(
+            psychometricTest[q1]["ans"][i]
+          );
+          labelConInput.appendChild(input);
+          labelConInput.appendChild(textnode);
+          options.appendChild(labelConInput);
         }
-    </script>
-</head>
+        console.log(psychometricTest[q1]["ans"]);
+        console.log(psychometricTest[q1]["ans"].length);
+        nextbutton.addEventListener("click", function () {//監聽
+          const radio = document.getElementsByName("radio");
+          let selectedAns = "";
+          for (let i = 0; i < radio.length; i++) {
+            if (radio[i].checked) {
+              selectedAns = psychometricTest[q1]["next"][i];
+              console.log(selectedAns);
+              setQuestion(selectedAns);
+              console.log(psychometricTest[q1]);
+              break;
+            }
+          }
+        });
+        document.getElementById("content").appendChild(questionTr);
 
-<body>
+      }
+    </script>
+  </head>
+
+  <body>
     <h1>心理測驗看「減肥會成功or失敗」</h1>
     <p>減重方式五花八門，你確定自己適合哪種減重方式嗎？</p>
     <p>做個心理測驗試試看吧？</p>
-    <p>心理測驗來源： <a href="https://www.facebook.com/RDJIAHUEI/?locale=zh_TW">李佳蕙營養師</a></p>
-    <br>
-    <hr>
+    <p>
+      心理測驗來源：
+      <a href="https://www.facebook.com/RDJIAHUEI/?locale=zh_TW"
+        >李佳蕙營養師</a
+      >
+    </p>
+    <br />
+    <hr />
     <table border="1" id="content">
-        <tr>
-            <th>題號</th>
-            <th>題目</th>
-            <th>選項</th>
-            <th></th>
-        </tr>
+      <tr>
+        <th>題號</th>
+        <th>題目</th>
+        <th>選項</th>
+        <th></th>
+      </tr>
     </table>
-    <br>
+    <br />
     <div id="resultDiv"></div>
-
-</body>
-
+  </body>
 </html>
