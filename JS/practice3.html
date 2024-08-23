@@ -48,7 +48,7 @@
         //   labelConInput.setAttribute('style', '');
           const input = document.createElement("input");
           input.setAttribute("type", "radio");
-          input.setAttribute("name", "radio");
+          input.setAttribute("name", q1);
           const textnode = document.createTextNode(
             psychometricTest[q1]["ans"][i]
           );
@@ -59,7 +59,7 @@
         console.log(psychometricTest[q1]["ans"]);
         console.log(psychometricTest[q1]["ans"].length);
         nextbutton.addEventListener("click", function () {//監聽
-          const radio = document.getElementsByName("radio");
+          const radio = document.getElementsByName(q1);
           let selectedAns = "";
           for (let i = 0; i < radio.length; i++) {
             if (radio[i].checked) {
