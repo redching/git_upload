@@ -12,67 +12,103 @@
     <!-- <script src="psychometricTestArray.js" defer></script> -->
     <script src="psychometricTestObject.js" defer></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        const content = document.getElementById("content");
-        const tr = document.createElement("tr");
+      document.addEventListener('DOMContentLoaded', function () {
+        const content = document.getElementById('content');
+        const tr = document.createElement('tr');
         // for (let i = 0; i < psychometricTest.length; i++) {
         //     console.log(psychometricTest[i])
         // }
         // for(let value of psychometricTest){
         //     console.log(value);
         // }
-        setQuestion("Q1");
+        setQuestion('Q1');
       });
       function setQuestion(q1) {
-        const questionTr = document.createElement("tr");
-        const questionNum = document.createElement("th");
-        const question = document.createElement("th");
-        const options = document.createElement("th");
-        options.setAttribute("style", "text-align:start");
-        const buttontd = document.createElement("th");
-        const nextbutton = document.createElement("button");
+        const questionTr = document.createElement('tr');
+        const questionNum = document.createElement('th');
+        const question = document.createElement('th');
+        const options = document.createElement('th');
+        options.setAttribute('style', 'text-align:start');
+        const buttontd = document.createElement('th');
+        const nextbutton = document.createElement('button');
         questionTr.appendChild(questionNum);
         questionTr.appendChild(question);
         questionTr.appendChild(options);
         questionTr.appendChild(buttontd);
         buttontd.appendChild(nextbutton);
-        nextbutton.innerText = "下一題";
+        nextbutton.innerText = '下一題';
         questionNum.innerText = q1;
-        console.log(q1)
-        console.log(psychometricTest[q1])
-        question.innerText = psychometricTest[q1]["question"];
-        console.log(psychometricTest[q1]["question"])
-        for (let i = 0; i < psychometricTest[q1]["ans"].length; i++) {
-          const labelConInput = document.createElement("label");
-          labelConInput.setAttribute("style", "display:block;");
-        //   labelConInput.setAttribute('style', '');
-          const input = document.createElement("input");
-          input.setAttribute("type", "radio");
-          input.setAttribute("name", q1);
+        question.innerText = psychometricTest[q1]['question'];
+        //建立radio按鈕
+        for (let i = 0; i < psychometricTest[q1]['ans'].length; i++) {
+          const labelConInput = document.createElement('label');
+          labelConInput.setAttribute('style', 'display:block;');
+          //   labelConInput.setAttribute('style', '');
+          const input = document.createElement('input');
+          input.setAttribute('type', 'radio');
+          input.setAttribute('name', q1);
+          //答案的內容
           const textnode = document.createTextNode(
-            psychometricTest[q1]["ans"][i]
+            psychometricTest[q1]['ans'][i],
           );
           labelConInput.appendChild(input);
           labelConInput.appendChild(textnode);
           options.appendChild(labelConInput);
         }
-        console.log(psychometricTest[q1]["ans"]);
-        console.log(psychometricTest[q1]["ans"].length);
-        nextbutton.addEventListener("click", function () {//監聽
+        //監聽下一題按鈕
+        nextbutton.addEventListener('click', function () {
           const radio = document.getElementsByName(q1);
-          let selectedAns = "";
+          const input = document.getElementsByName(q1);
+          let selectedAns;
           for (let i = 0; i < radio.length; i++) {
             if (radio[i].checked) {
               selectedAns = psychometricTest[q1]["next"][i];
-              console.log(selectedAns);
-              setQuestion(selectedAns);
-              console.log(psychometricTest[q1]);
               break;
             }
           }
-        });
-        document.getElementById("content").appendChild(questionTr);
+          if(!selectedAns){
+            alert('Please select');
+            return;
+          }
 
+          if (
+            selectedAns === 'A' ||
+            selectedAns === 'B' ||
+            selectedAns === 'C' ||
+            selectedAns === 'D'
+          ) {
+            finalres(selectedAns);
+          } else {
+            setQuestion(selectedAns);
+          }
+          for (let i = 0; i < input.length; i++) {
+            input[i].disabled = true;
+          }
+          nextbutton.disabled = true;
+        });
+        document.getElementById('content').appendChild(questionTr);
+      }
+
+      function finalres(selectedAns) {
+        const resultDiv = document.getElementById('resultDiv');
+        const resDiv = document.createElement('div');
+        resDiv.setAttribute('style','display:flex; gap:10px');
+        const resH1 = document.createElement('h1');
+        resH1.innerText = selectedAns;
+        const resH2 = document.createElement('h1');
+        resH2.innerText = result[selectedAns]['title'];
+        const resP = document.createElement('P');
+        resP.innerText = result[selectedAns]['content'];
+        const retryBtn = document.createElement('button');
+        retryBtn.innerText = '重新測驗';
+        resultDiv.appendChild(resDiv);
+        resultDiv.appendChild(resP);
+        resDiv.appendChild(resH1);
+        resDiv.appendChild(resH2);
+        resultDiv.appendChild(retryBtn);
+        retryBtn.addEventListener('click', function () {
+          location.reload();
+        });
       }
     </script>
   </head>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <title>期中測驗</title>
+    <style>
+      body {
+        background-color: #f4f4f4;
+      }
+      input {
+        width: 15%;
+        padding: 10px 20px;
+        border-radius: 5px;
+        border-color: #204056;
+        color: #204056;
+        margin-right: 10px;
+      }
+      button {
+        padding: 10px 20px;
+        border-radius: 5px;
+        background-color: #204056;
+        color: #f4f4f4;
+        cursor: pointer;
+      }
+      h1 {
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        color: #f4f4f4;
+        background-color: #204056;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #fff;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: center;
+        /* visibility: hidden; */
+      }
+      th {
+        background-color: #642406;
+      }
+      .disabled {
+        pointer-events: none;
+        opacity: 0.5;
+      }
+    </style>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function () {
+        // 共用API方法，請勿更動
+        var callApi = function callApi(url, param) {
+          return fetch(url, {
+            method: 'post',
+            body: JSON.stringify(param),
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          }).then(function (response) {
+            return response.json();
+          });
+        };
+        //創建格子
+        function column(inputNum) {
+          const table = document.getElementById('tables');
+          for (y = 0; y < inputNum; y++) {
+            let tr = document.createElement('tr');
+            table.appendChild(tr);
+            for (x = 0; x < inputNum; x++) {
+              let td = document.createElement('td');
+              td.setAttribute('id', y * inputNum + x);
+              td.setAttribute('style', 'opacity:0;');
+              td.addEventListener('click', function () {
+                pushCard(td);
+              });
+              tr.appendChild(td);
+            }
+          }
+        }
+        document
+          .getElementById('btnSubmit')
+          .addEventListener('click', function () {
+            let inputNum = document.getElementById('inputNum').value;
+            if (inputNum % 2 != 0 || 1 > inputNum || inputNum > 7) {
+              document.getElementById('tables').innerHTML = '';
+              document.getElementById('inputNum').value = '';
+              alert('請輸入偶數且在2~6之間');
+              return;
+            }
+            var param = {
+              num: inputNum,
+            };
+            const table = document.getElementById('tables');
+            table.innerHTML = '';
+            document.getElementById('inputNum').value = '';
+            column(inputNum);
+            let cards = [];
+            callApi('http://localhost:8080/midterm/matchingGame', param).then(
+              function (response) {
+                for (let key in response) {
+                  let cell = document.getElementById(key);
+                  cell.innerText = response[key];
+                  cards.push(response[key]);
+                }
+              },
+            );
+          });
+      });
+
+      // 翻牌遊戲邏輯
+      let firstCard = null;
+      let secondCard = null;
+      let firstSelectedCell = null;
+      let secondSelectedCell = null;
+      // 將值放入Card
+      function pushCard(cardId) {
+        if (!firstCard) {
+          firstCard = cardId.innerText;
+          firstSelectedCell = cardId;
+          firstSelectedCell.style.backgroundColor = ' #add8e6';
+          showCards(cardId);
+          return;
+        } else {
+          if (
+            firstSelectedCell === cardId ||
+            firstSelectedCell === secondSelectedCell
+          ) {
+            return;
+          }
+          secondSelectedCell = cardId;
+          secondCard = cardId.innerText;
+          showCards(cardId);
+          compareCards(cardId);
+        }
+      }
+      //比較卡片
+      function compareCards(cardId) {
+        if (firstCard === secondCard) {
+          showCards(firstSelectedCell);
+          showCards(secondSelectedCell);
+          bgColor('#78A153');
+          disableAllTds();
+          setTimeout(function () {
+            bgColor('white');
+            ableAllTds();
+            resetCard();
+          }, 500);
+        } else {
+          bgColor('#C53211');
+          disableAllTds();
+          setTimeout(function () {
+            bgColor('white');
+            hideCards(firstSelectedCell);
+            hideCards(secondSelectedCell);
+            ableAllTds();
+            resetCard();
+          }, 800);
+        }
+      }
+      // 隱藏卡片
+      function hideCards(cardId) {
+        cardId.style.opacity = '0';
+      }
+      // 顯示卡片
+      function showCards(cardId) {
+        cardId.style.opacity = '1';
+      }
+      // 重製卡片
+      function resetCard() {
+        firstCard = null;
+        secondCard = null;
+        firstSelectedCell = null;
+        secondSelectedCell = null;
+      }
+      //鎖住格子
+      function disableAllTds() {
+        const tds = tables.querySelectorAll('td');
+        tds.forEach((td) => {
+          td.style.pointerEvents = 'none';
+        });
+      }
+      //解開格子
+      function ableAllTds() {
+        const tds = tables.querySelectorAll('td');
+        tds.forEach((td) => {
+          if (td.style.opacity == '0') {
+            td.style.pointerEvents = 'auto';
+            return;
+          }
+        });
+      }
+
+      //顏色改變
+      function bgColor(color) {
+        firstSelectedCell.style.backgroundColor = color;
+        secondSelectedCell.style.backgroundColor = color;
+      }
+    </script>
+  </head>
+  <body>
+    <h1 style="text-align: center">翻翻樂</h1>
+    <form
+      action="http://localhost:8080/midterm/matchingGame"
+      method="post"
+      style="text-align: center; margin-bottom: 10px"
+    >
+      <input
+        id="inputNum"
+        name="inputNum"
+        type="text"
+        placeholder="請輸入2~6的偶數"
+      /><button type="button" id="btnSubmit" style="margin-left: 20px">
+        送出
+      </button>
+    </form>
+    <table id="tables" style="width: 50%; margin: auto"></table>
+  </body>
+</html>
